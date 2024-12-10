@@ -19,6 +19,19 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 #model = SentenceTransformer('all-distilroberta-v1')
 #model = SentenceTransformer('all-MiniLM-L12-v2')
 #model = SentenceTransformer('paraphrase-mpnet-base-v2')
+#model = SentenceTransformer('nli-mpnet-base-v2') # this can handle negation better.
+
+
+# In[80]:
+
+
+# this function is for embedding models. it will make the embedding treat NOT as a distinct token.
+def handle_negations(text):
+    # Define common negation patterns
+    negation_words = ["not", "never", "no", "neither", "none", "cannot"]
+    for word in negation_words:
+        text = text.replace(f" {word} ", f" {word}_(NEG) ")
+    return text
 
 
 # In[56]:
@@ -61,13 +74,14 @@ df = pd.DataFrame(data)
 
 # ## Streamlit ##
 
-# In[76]:
+# In[84]:
 
 
 st.title("COS Similarity")
 st.write("This demo shows the application of cos simialarity to scan through the reports and identify a match in description, MO or simiarity of the texts.")
 
 query_text = st.text_area(label="Enter a vehicle description.", value="a 4-dr white honda civic was driving east and hit another car. the honda didn't stop. Witness saw the car and reported the hit and run to police.")
+query_text = handle_negations(query_text)
 
 # Encode the query text
 query_embedding = model.encode(query_text, convert_to_tensor=True)
