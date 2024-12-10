@@ -83,7 +83,7 @@ if st.button(label="Search"):
     df['Similarity Score'] = df['Descriptions'].apply(calculate_similarity)
     st.table(df)
 
-st.write("This demo only shows an example of identifyimg a similar vehicle. It can be MO or anything and the possibilities are endless.")
+st.write("This demo only shows an example of identifyimg a similar vehicle. It is also possible to identify MO or anything and the possibilities are endless.")
 
 
 # In[ ]:
