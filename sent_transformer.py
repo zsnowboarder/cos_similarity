@@ -61,13 +61,13 @@ df = pd.DataFrame(data)
 
 # ## Streamlit ##
 
-# In[70]:
+# In[76]:
 
 
 st.title("COS Similarity")
 st.write("This demo shows the application of cos simialarity to scan through the reports and identify a match in description, MO or simiarity of the texts.")
 
-query_text = st.text_area("white honda civic with 4 doors")
+query_text = st.text_area(label="Enter a vehicle description.", value="a 4-dr white honda civic was driving east and hit another car. the honda didn't stop. Witness saw the car and reported the hit and run to police.")
 
 # Encode the query text
 query_embedding = model.encode(query_text, convert_to_tensor=True)
