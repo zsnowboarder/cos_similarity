@@ -26,7 +26,7 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 
 # Create a DataFrame with descriptions
 data = {
-    'Descriptions': [
+    'report': [
         "The car turned left and the kept going. The description of the car was white honda civic, 4 door. The victim didn't see the suspects clearly.",
         "make was honda and model was civic. colour is white. 4 door with large windows",
         "the description provided was honda accord, 4 door.",
@@ -55,7 +55,7 @@ df = pd.DataFrame(data)
 #     return similarity_score.item()
 # 
 # # Apply similarity calculation and add as a new column
-# df['Similarity Score'] = df['Descriptions'].apply(calculate_similarity)
+# df['Similarity Score'] = df['report'].apply(calculate_similarity)
 # 
 # print(df)
 
@@ -80,7 +80,7 @@ def calculate_similarity(description):
 
 if st.button(label="Search"):
     # Apply similarity calculation and add as a new column
-    df['Similarity Score'] = df['Descriptions'].apply(calculate_similarity)
+    df['Similarity Score'] = df['report'].apply(calculate_similarity)
     st.table(df)
 
 st.write("This demo only shows an example of identifyimg a similar vehicle. It is also possible to identify MO or anything and the possibilities are endless.")
