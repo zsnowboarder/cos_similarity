@@ -43,7 +43,10 @@ data = {
         "The car turned left and the kept going. The description of the car was white honda civic, 4 door. The victim didn't see the suspects clearly.",
         "make was honda and model was civic. colour is white. 4 door with large windows",
         "the description provided was honda accord, 4 door.",
-        "it was a black pickup truck. unknown make and model."
+        "it was a black pickup truck. unknown make and model.",
+        "victim was walking home. suspect was hiding in the bush. suspect jumped out and groped victim from behind. suspect told victim not to scream or victim will get hurt.",
+        "yesterday, victim reported walking to school. all of a sudden, suspect jumped out from the bush. suspect chased victim and groped victim. suspect told victim not to scream.",
+        "victim was walking home from school and noticed being followed by a vehicle. the vehicle approached victim and the suspect asked if victim wanted some candies."
     ]
 }
 df = pd.DataFrame(data)
