@@ -98,7 +98,7 @@ st.title("COS Similarity")
 st.write("""This demo shows the application of cos simialarity to scan through the reports and identify a match in description, MO or simiarity of the texts.
             The model searches through the database and returns a similarity score.""")
 
-query_text = st.text_area(label="Enter a vehicle description or a sex offender MO:", value="Female student was walking home from school. Suspect jump out of the bush and groped the student from behind.")
+query_text = st.text_area(label="Enter a vehicle description or a sex offender MO:", value="Female student was walking home from school. Suspect jumped out of the bush and groped the student from behind.")
 query_text = handle_negations(query_text)
 
 # Encode the query text
