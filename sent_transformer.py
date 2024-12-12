@@ -63,7 +63,7 @@ data = {
 
 # Load excel data
 df = pd.read_excel("/mount/src/cos_similarity/data.xlsx")
-df = pd.DataFrame(data)
+#df = pd.DataFrame(data)
 df["report"] = df["report"].apply(replace_abbreviations)
 
 # In[ ]:
