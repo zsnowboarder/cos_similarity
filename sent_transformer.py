@@ -1,17 +1,18 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[62]:
+# In[5]:
 
 
 import pandas as pd
 import streamlit as st
+import re
 from sentence_transformers import SentenceTransformer, util
 
 
 
 
-# In[55]:
+# In[6]:
 
 
 # Load the pre-trained SentenceTransformer model
@@ -22,8 +23,18 @@ model = SentenceTransformer('paraphrase-MiniLM-L6-v2')
 #model = SentenceTransformer('nli-mpnet-base-v2') # this can handle negation better.
 
 
-# In[80]:
+# In[9]:
 
+
+def replace_abbreviations(text):
+    abbreviations = {
+        "blk":"black",
+        "brn":"brn",
+        "blu":"blue"
+    }
+    for abbr, word in abbreviations.items():
+        text = re.sub(r"\b" + abbr + r"\b", word, text)
+    return text
 
 # this function is for embedding models. it will make the embedding treat NOT as a distinct token.
 def handle_negations(text):
@@ -34,22 +45,21 @@ def handle_negations(text):
     return text
 
 
-# In[56]:
+# In[11]:
 
 
 # Create a DataFrame with descriptions
 data = {
     'report': [
         "The car turned left and the kept going. The description of the car was white honda civic, 4 door. The victim didn't see the suspects clearly.",
-        "make was honda and model was civic. colour is white. 4 door with large windows",
-        "the description provided was honda accord, 4 door.",
-        "it was a black pickup truck. unknown make and model.",
-        "victim was walking home. suspect was hiding in the bush. suspect jumped out and groped victim from behind. suspect told victim not to scream or victim will get hurt.",
-        "yesterday, victim reported walking to school. all of a sudden, suspect jumped out from the bush. suspect chased victim and groped victim. suspect told victim not to scream.",
-        "victim was walking home from school and noticed being followed by a vehicle. the vehicle approached victim and the suspect asked if victim wanted some candies."
+        "Victim described the make was honda and model was civic. colour is white. 4 door with large windows",
+        "The description provided was honda accord, 4 door.",
+        "It was a black pickup truck. unknown make and model."
     ]
 }
 df = pd.DataFrame(data)
+df["report"] = df["report"].apply(replace_abbreviations)
+df
 
 
 # In[ ]:
@@ -81,9 +91,10 @@ df = pd.DataFrame(data)
 
 
 st.title("COS Similarity")
-st.write("This demo shows the application of cos simialarity to scan through the reports and identify a match in description, MO or simiarity of the texts.")
+st.write("""This demo shows the application of cos simialarity to scan through the reports and identify a match in description, MO or simiarity of the texts.
+            The model searches through the database and returns a similarity score.""")
 
-query_text = st.text_area(label="Enter a vehicle description.", value="a 4-dr white honda civic was driving east and hit another car. the honda didn't stop. Witness saw the car and reported the hit and run to police.")
+query_text = st.text_area(label="Enter a vehicle description or a sex offender MO:", value="a 4-dr white honda civic was driving east and hit another car. the honda didn't stop. Witness saw the car and reported the hit and run to police.")
 query_text = handle_negations(query_text)
 
 # Encode the query text
@@ -100,7 +111,7 @@ if st.button(label="Search"):
     df['Similarity Score'] = df['report'].apply(calculate_similarity)
     st.table(df)
 
-st.write("This demo only shows an example of identifyimg a similar vehicle. It is also possible to identify MO or anything and the possibilities are endless.")
+st.write("This demo only shows examples of vehicle and MO search. It can do any similarity search and the possibilities are endless.")
 
 
 # In[ ]:
