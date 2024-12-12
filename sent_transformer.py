@@ -54,13 +54,14 @@ data = {
         "The car turned left and the kept going. The description of the car was white honda civic, 4 door. The victim didn't see the suspects clearly.",
         "Victim described the make was honda and model was civic. colour is white. 4 door with large windows",
         "The description provided was honda accord, 4 door.",
-        "It was a black pickup truck. unknown make and model."
+        "It was a black pickup truck. unknown make and model.",
+        "Victim was walking to home. Suspect jumped out from the bush and groped victim from behind and ran a way. Victim reported the incident to police.",
+        "Victim was on the way to school. Suspect followed victim in a vehicle. Suspect approached victim and asked if victim wanted candies. Victim ran away.",
+        "Victim was walking on a street. Suspect suddenly groouped victim and pushed victim to the ground. Victim was able to escape."
     ]
 }
 df = pd.DataFrame(data)
 df["report"] = df["report"].apply(replace_abbreviations)
-df
-
 
 # In[ ]:
 
