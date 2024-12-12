@@ -60,6 +60,9 @@ data = {
         "Victim was walking on a street. Suspect suddenly groouped victim and pushed victim to the ground. Victim was able to escape."
     ]
 }
+
+# Load excel data
+df = pd.load_excel(data.xlsx)
 df = pd.DataFrame(data)
 df["report"] = df["report"].apply(replace_abbreviations)
 
