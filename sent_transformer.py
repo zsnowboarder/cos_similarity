@@ -117,7 +117,7 @@ if st.button(label="Search"):
     # Apply similarity calculation and add as a new column
     df['Similarity Score'] = df['report'].apply(calculate_similarity)
     df = df.sort_values(by="Similarity Score", ascending=False)
-    st.table(df.style.hid(axis="index"))
+    st.table(df.style.hide(axis="index"))
 
 st.write("This demo only shows examples of vehicle and MO search. It can do any similarity search and the possibilities are endless.")
 
