@@ -120,8 +120,8 @@ if st.button(label="Search"):
     df = df.reset_index(drop=True)
     st.table(df)
 
-st.write("This demo only shows examples of vehicle and MO search. It can do any similarity search and the possibilities are endless.")
-
+st.write("""This demo only shows the practical usages of vehicle and MO search. It can do any similarity search.
+Further exploration could focus on a more diverse dataset to evaluate its effectiveness.""")
 
 # In[ ]:
 
